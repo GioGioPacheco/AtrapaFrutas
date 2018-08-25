@@ -1,3 +1,4 @@
+
 //Valores cuadrado
 int x = 0;
 int y = 678;
@@ -13,15 +14,22 @@ float distancia ;
 int puntaje = 0;
 float velocidad = random(1, 5);
 int estado[];
-PImage img;
 
+//imagenes 
 
+PImage fondo;
+PImage fruta;
+PImage boton;
 
 void setup(){
   size(800,800);
+  fondo = loadImage("fondo.png");
+   fruta = loadImage("Fruta150.png");
+      boton = loadImage("btn.png");
+
+  
   posX = new float[800];
   posY = new float[100];
-  img = loadImage("Fruta.png");
   estado = new int[100];
   for(int i=0; i<100; i++){
     posX[i]=random(800);
@@ -32,7 +40,11 @@ void setup(){
 }
 
 void draw(){
-    background(#0F89FF);
+  background(0);
+  image(fondo,0,0);
+ 
+ //Puntajeboton
+ rect(x,y,anchoCuadrado,altoCuadrado);
      puntaje=0;
 
 
@@ -43,12 +55,11 @@ void draw(){
  tecladointeraccion();
  
  //frutas
- fill(#A32ABC);
+    
   for(int i=0; i<100; i++){
     posY[i] = posY[i]+velocidad;
     if(estado[i]==1){
-      ellipse(posX[i],posY[i],20,20);
-     // img = loadImage(posX[i],posY[i]);
+      image(fruta,posX[i],posY[i],150,150);
     }
     else{
       puntaje = puntaje+1;
@@ -56,8 +67,8 @@ void draw(){
   }
   //puntajeinf
   fill(0);
-  text("Puntaje:"+puntaje,30,30 );
- 
+  text("Puntaje:"+puntaje,40,40 );
+ image(boton,35,40);
 }
  void tecladointeraccion(){
    if(keyPressed == true){
@@ -67,7 +78,7 @@ void draw(){
        x = x+=10;}
      for(int i=0; i<100; i++){
      if(key == 'e'){
-       distancia = dist(x,y,posX[i],posY[i]);
+       distancia = dist(X,y,posX[i],posY[i]);
         if(distancia<20){
         estado[i]=0;
       }
